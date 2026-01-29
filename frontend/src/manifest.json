@@ -1,5 +1,6 @@
 {
   "manifest_version": 3,
+  "name": "SmartPage-AI",
   "permissions": ["storage", "sidePanel", "tabs", "scripting"],
   "host_permissions": ["<all_urls>"],
   "background": {
