@@ -1,0 +1,68 @@
+.settings-container {
+  height: 100%;
+  padding: 12px;
+  font-family: sans-serif;
+  background: #f4f6ff;
+  color: #1a1a1a;
+}
+
+.settings-container.dark {
+  background: #121212;
+  color: #eaeaea;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+  color: inherit;
+}
+
+/* ===== TOGGLE ===== */
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Switch */
+.switch {
+  position: relative;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 22px;
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background: #4f6cff;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
