@@ -1,16 +1,14 @@
 {
   "manifest_version": 3,
+  "description":"A React based extension powered by Langchain and FastAPI",
   "name": "SmartPage-AI",
-  "permissions": ["storage", "sidePanel", "tabs", "scripting"],
-  "host_permissions": ["<all_urls>"],
+  "version": "1.0.0",
+  "permissions": ["storage", "tabs", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html" 
+  },
   "background": {
     "service_worker": "src/background.js"
-  },
-  "action": {
-    "default_popup": "popup.html"
-  },
-  "side_panel": {
-    "default_path": "sidepanel.html"
   },
   "content_scripts": [
     {

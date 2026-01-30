@@ -7,9 +7,7 @@ import uvicorn
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessage
 
-# ----------------------
-# App setup
-# ----------------------
+
 app = FastAPI()
 
 app.add_middleware(
@@ -20,9 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ----------------------
-# Env & Model
-# ----------------------
 load_dotenv()
 
 llm = ChatGroq(
@@ -30,23 +25,17 @@ llm = ChatGroq(
     temperature=0.7
 )
 
-# ----------------------
-# Simple in-memory chat history
-# ----------------------
-chat_history = []  # list[HumanMessage | AIMessage]
 
-# ----------------------
-# Schema
-# ----------------------
+chat_history = [] 
+
+
 class AskRequest(BaseModel):
     text: str
 
 class AskResponse(BaseModel):
     answer: str
 
-# ----------------------
-# Routes
-# ----------------------
+
 @app.get("/")
 def greet():
     return {"message": "SmartPage AI backend running on port 5001"}
@@ -55,13 +44,10 @@ def greet():
 async def ask_ai(data: AskRequest):
     global chat_history
 
-    # add user message
     chat_history.append(HumanMessage(content=data.text))
 
-    # call model with full history
     response = await llm.ainvoke(chat_history)
 
-    # add AI response
     chat_history.append(AIMessage(content=response.content))
 
     return {"answer": response.content}
@@ -71,9 +57,6 @@ def reset_chat():
     chat_history.clear()
     return {"message": "Chat history cleared"}
 
-# ----------------------
-# Run server
-# ----------------------
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",

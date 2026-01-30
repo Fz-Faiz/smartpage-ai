@@ -15,6 +15,18 @@ export default function Popup() {
       setDark(result.darkMode);
     });
   }, []);
+
+  // Inside your useEffect
+useEffect(() => {
+  const checkPendingText = async () => {
+    const data = await chrome.storage.local.get("pendingText");
+    if (data.pendingText) {
+      setInput(data.pendingText); // This puts the text into your <input>
+      chrome.storage.local.remove("pendingText"); // Clear it so it doesn't repeat
+    }
+  };
+  checkPendingText();
+}, []);
   // AUTO-FILL selected text (Power Thesaurus behavior)
 useEffect(() => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {

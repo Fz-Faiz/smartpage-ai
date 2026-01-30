@@ -1,20 +1,37 @@
-// src/background.js
+
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  
+
+console.log("Message received:", request.type); 
+
+  if (request.type === "PREFILL_TEXT") {
+    chrome.storage.local.set({ pendingText: request.text }, () => {
+      console.log("Text saved successfully");
+      sendResponse({ status: "saved" }); 
+    });
+    return true; 
+  }
+
   if (request.type === "POPUP_ASK") {
-    // 1. Get the current active tab
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTab = tabs[0];
+      if (!activeTab?.id) {
+        sendResponse({ error: "No active tab found." });
+        return;
+      }
 
-      // 2. Ask the content script to scrape the page text
+    
       chrome.tabs.sendMessage(activeTab.id, { type: "GET_PAGE_CONTENT" }, async (pageData) => {
+        if (chrome.runtime.lastError) {
+          sendResponse({ error: "Cannot read this page. Try refreshing." });
+          return;
+        }
+
         const pageText = pageData?.text || "No content found on page.";
-        
-        // 3. Combine user query with page context for the prompt
         const combinedPrompt = `Context from webpage: ${pageText}\n\nUser Question: ${request.text}`;
 
         try {
-          // 4. Send to your FastAPI backend
           const response = await fetch("http://localhost:5001/ask", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -29,6 +46,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       });
     });
-    return true; // Keeps the messaging channel open for the async fetch
+    return true; 
   }
 });
