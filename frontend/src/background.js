@@ -4,6 +4,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   
 
 console.log("Message received:", request.type); 
+// Example in background.js
+const API_URL = "https://smartpage-ai.onrender.com";
+// Local host -> http://localhost:5001/ask"
 
   if (request.type === "PREFILL_TEXT") {
     chrome.storage.local.set({ pendingText: request.text }, () => {
@@ -32,7 +35,7 @@ console.log("Message received:", request.type);
         const combinedPrompt = `Context from webpage: ${pageText}\n\nUser Question: ${request.text}`;
 
         try {
-          const response = await fetch("http://localhost:5001/ask", {
+          const response = await fetch("https://smartpage-ai.onrender.com", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ text: combinedPrompt })
