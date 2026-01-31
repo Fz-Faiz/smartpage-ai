@@ -24,7 +24,7 @@ async function handleChatRequest(userText, sendResponse) {
       sendResponse({ error: "No active tab found." });
       return;
     }
-\
+
     const pageData = await new Promise((resolve) => {
       chrome.tabs.sendMessage(tab.id, { type: "GET_PAGE_CONTENT" }, (response) => {
         if (chrome.runtime.lastError) resolve({ text: "" });
