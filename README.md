@@ -13,8 +13,7 @@ Powered by **Groq's Llama 3.1**, it analyzes page content or selected text to de
 
 > Replace these with your latest popup screenshots.
 
-![Popup Screenshot 1](YOUR_POPUP_IMAGE_1)
-![Popup Screenshot 2](YOUR_POPUP_IMAGE_2)
+![Popup Screenshot 1](https://github.com/Fz-Faiz/smartpage-ai/blob/main/images/SP%20%20popup.png)
 
 ---
 
@@ -22,8 +21,7 @@ Powered by **Groq's Llama 3.1**, it analyzes page content or selected text to de
 
 > Replace these with your settings screenshots.
 
-![Settings Screenshot 1](YOUR_SETTINGS_IMAGE_1)
-![Settings Screenshot 2](YOUR_SETTINGS_IMAGE_2)
+![Settings Screenshot 1](https://github.com/Fz-Faiz/smartpage-ai/blob/main/images/SP%20setting.png)
 
 ---
 
@@ -96,7 +94,7 @@ Example: Documents/SmartPage-AI
 
 Since the backend is hosted on **Render Free Tier**, it sleeps after **15 minutes of inactivity**.
 
-👉 Click the link below before using the extension:
+👉 Click the link below before using the extension: https://smartpage-ai.onrender.com
 
 **Wake Up SmartPage AI Backend**
 
